@@ -20,17 +20,26 @@
 
 <!---search area-->
 
-      <div class="col-md-3 bg-light mt-3">
-        <h3 id="citySearch">Search for a City:</h3>
+    <div class="col-md-3 bg-light mt-3">
+      <h3 id="citySearch">Search for a City:</h3>
         <form id="cityForm"></form>
           <div class="input"></div>
             <input id="cityText" type="text" placeholder="Enter City Name" aria-lable="enter city name">
             <div class="input-append"></div>
-            <button type="search" class="btn btn-primary" id="searchBtn">Search</button>
-          </div>
+            <button type="search" class="btn btn-primary" id="searchBtn">Search</button></div>
       </div>
 
-    <div class="row align-items-center">
+<!---history section-->
+
+    <div id="searchHistory" class="mt-3"></div>
+
+  <!---current city section-->
+
+    <div class="col-md-9 mt-2">
+      <div class="row"></div>
+        <div id="current container"></div>
+        
+  <!---5day weather-->      
       <h2 class="row align-items-center">5-Day Forecast: <span id="city-search-term"></span></h2>
       <div id="5-Day" class="5-Day"></div>
     </div>
