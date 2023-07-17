@@ -9,105 +9,130 @@ var currentCityContainerEl = document.getElementById('currentContainer')
 var futureWeatherEl = document.getElementById('5-day');
 var forecastSectionEl = document.getElementById('forecastSection');
 
-var formSubmitHandler = function (event) {
-  event.preventDefault();
+var cities = []
 
-  var cityText = inputEl.value.trim();
-
-  if (cityText) {
-    getCityText(cityText);
-
-    repoContainerEl.textContent = '';
-    nameInputEl.value = '';
-  } else {
-    alert('Please enter City name');
+var loadcities = function() {
+  var citiesLoaded = localStorage.getItem('cities')
+  if(!citiesLoaded) {
+    return false;
   }
-};
-
-var buttonClickHandler = function (event) {
-  // `event.target` is a reference to the DOM element of what programming language button was clicked on the page
-  var language = event.target.getAttribute('data-language');
-
-  // If there is no language read from the button, don't attempt to fetch repos
-  if (language) {
-    getFeaturedRepos(language);
-
-    repoContainerEl.textContent = '';
+  citiesLoaded = JSON.parse(citiesLoaded);
+  
+  for (var i=0; < citiesLoaded.length; i++) {
+    displaySearchCities(citiesLoaded[i])
+    cities.push(citiesLoaded)
   }
-};
+}
 
-var getUserRepos = function (user) {
-  var apiUrl = 'https://api.github.com/users/' + user + '/repos';
+var saveCities = function() {
+  localStorage.setItem('cities', JSON.stringify(cities));
+}
 
-  fetch(apiUrl)
-    .then(function (response) {
-      if (response.ok) {
-        console.log(response);
-        response.json().then(function (data) {
-          console.log(data);
-          displayRepos(data, user);
-        });
-      } else {
-        alert('Error: ' + response.statusText);
-      }
-    })
-    .catch(function (error) {
-      alert('Unable to connect to GitHub');
-    });
-};
+var displaySearchCities = (city) 
 
-var getFeaturedRepos = function (language) {
-  // The `q` parameter is what language we want to query, the `+is:featured` flag adds a filter to return only featured repositories
-  // The `sort` parameter will instruct GitHub to respond with all of the repositories in order by the number of issues needing help
-  var apiUrl = 'https://api.github.com/search/repositories?q=' + language + '+is:featured&sort=help-wanted-issues';
+  var cityCardEl = document.createElement('div');
+  cityCardEl.setAttribute('class', 'card');
+  var cityCardNameEl = document.createElement('div');
+  cityCardNameEl.setAttribute('class', 'card-body searched-city');
+  cityCardNameEl.textContent = city;
 
-  fetch(apiUrl).then(function (response) {
-    if (response.ok) {
-      response.json().then(function (data) {
-        displayRepos(data.items, language);
-      });
-    } else {
-      alert('Error: ' + response.statusText);
-    }
+  cityCardEl.appendChild(cityCardNameEl)
+
+  cityCardEl.addEventListener('click', function() {
+    getCityData(city)
   });
+  searchHistoryEl.appendChild(cityCardEl)
+
+
+
+// display current weather conditions
+
+var displayCurrentData = function(city, data){
+
+  var tempCurrent = Math.round(data.current.temp);
+  var humidity = Math.round(data.current.humidity);
+  var windSpeed = data.current.windSpeed;
+  var uvIndex = data.current.uvi;
+  var iconCurrent = data.current.weather[0].icon;
+
+// date/icon/city HTML tags created
+  currentCityContainerEl.textContent = ""
+  currentCityContainerEl.setAttribute('class', "m-3 border col-10 text-center")
+  var divCityHeader = document.createElement('div');
+  var headerCityDate = document. createElement('h2');
+  var currentDate = dayjs().format('L');
+  var imageIcon = document.createElement('img');
+  imageIcon.setAttribute('src', '')
+  imageIcon.setAttribute('src', "https://openweathermap.org/img/wn/" + iconCurrent + "@2x.png")
+  headerCityDate.textContent = city + " (" + currentDate + ")";
+
+  divCityHeader.appendChild(headerCityDate)
+  divCityHeader.appendChild(imageIcon)
+  currentCityContainerEl.appendChild(divCityHeader)
+
+  var divCurrent = document.createElement('div');
+  var tempEl = document.createElement('p');
+  var humidityEl = document.createElement('p');
+  var windSpeedEl = document.createElement('p');
+  
+// add current weather data
+
+tempEl.textContent = 'Temperature;' + tempCurrent + 'Fahrenheit';
+humidityEl.textContent = 'Humidity' + humidity + '%';
+windSpeedEl.textContent = 'Wind Speed' + windSpeed + 'MPH';
+
+divCurrent.appendChild(tempEl);
+divCurrent.appendChild(humidityEl);
+divCurrent.appendChild(windSpeedEl);
+
+currentCityContainerEl.appendChild(divCurrent);
+
 };
 
-var displayRepos = function (repos, searchTerm) {
-  if (repos.length === 0) {
-    repoContainerEl.textContent = 'No repositories found.';
-    // Without a `return` statement, the rest of this function will continue to run and perhaps throw an error if `repos` is empty
-    return;
-  }
+// display forecast
 
-  repoSearchTerm.textContent = searchTerm;
+var displayForecastData = function(data) {
+  console.log(data)
+  forecastSectionEl.textContent = "";
+  var forecastHeaderEl = document.getElementById('5-day');
+  forecastHeaderEl.textContent = "5-Day Forecast"
 
-  for (var i = 0; i < repos.length; i++) {
-    // The result will be `<github-username>/<github-repository-name>`
-    var repoName = repos[i].owner.login + '/' + repos[i].name;
+  // create loop for 5-day forcast
 
-    var repoEl = document.createElement('div');
-    repoEl.classList = 'list-item flex-row justify-space-between align-center';
+  for (var i=1; i < 6; i++) {
+    var tempForcast = Math.round(data.daily[i].temp.day);
+    var humidityForecast = data.daily[i].humidity;
+    var iconForecast = data.daily[i].weather[0].icon
 
-    var titleEl = document.createElement('span');
-    titleEl.textContent = repoName;
+  // card and data elements
 
-    repoEl.appendChild(titleEl);
+  var cardEl = document.createElement ('div');
+  cardEl.setAttribute('class', 'card col-xl-2 col-md-5 col-sm-10 mx-3 my-2 bg-primary text-white text-center')
 
-    var statusEl = document.createElement('span');
-    statusEl.classList = 'flex-row align-center';
+  var cardBodyEl = document.createElement ('div');
+  cardBodyEl.setAttribute('class', 'card-body')
 
-    if (repos[i].open_issues_count > 0) {
-      statusEl.innerHTML =
-        "<i class='fas fa-times status-icon icon-danger'></i>" + repos[i].open_issues_count + ' issue(s)';
-    } else {
-      statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
-    }
+  var cardDateEl = document.createElement ('h5');
+  cardDateEl.textContent = dayjs().add(i,'days').format('L');
 
-    repoEl.appendChild(statusEl);
+  var cardTempEl = document.createElement('p');
+  cardTempEl.setAttribute('class', 'card-text');
+  cardTempEl.textContent = 'Temperature: ' + tempForcast + 'Fahrenheit';
 
-    repoContainerEl.appendChild(repoEl);
+  var cardHumidEl = document.createElement('p');
+  cardHumidEl.setAttribute('class', 'card-text');
+  cardHumidEl.textContent = 'humidity: ' + humidityForecast + '%';
+
+  // aapend to card body
+
+  cardBodyEl.appendChild(cardDateEl)
+  cardBodyEl.appendChild(cardTempEl)
+  cardBodyEl.appendChild(cardHumidEl)
+
+  cardEl.appendChild(cardBodyEl);
+  forecastSectionEl.appendChild(cardEl);
+
+  formEl.reset()
+
   }
 };
-
-userFormEl.addEventListener('submit', formSubmitHandler);
-languageButtonsEl.addEventListener('click', buttonClickHandler);
