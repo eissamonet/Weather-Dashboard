@@ -1,8 +1,13 @@
+// weather API key
 var APIKey = "92c39c28b00faf2a7003a9133027497d";
 
-var inputEl = document.querySelector('#cityText');
-var seacrhEl = document.querySelector('#searchBtn');
-var weatherEl = document.querySelector('#5-day');
+var formEl = document.getElementById('cityForm')
+var inputEl = document.getElementById('cityInput');
+var btnEl = document.getElementById('searchBtn');
+var searchHistoryEl = document.getElementById('searchHistory')
+var currentCityContainerEl = document.getElementById('currentContainer')
+var futureWeatherEl = document.getElementById('5-day');
+var forecastSectionEl = document.getElementById('forecastSection');
 
 var formSubmitHandler = function (event) {
   event.preventDefault();
@@ -15,7 +20,7 @@ var formSubmitHandler = function (event) {
     repoContainerEl.textContent = '';
     nameInputEl.value = '';
   } else {
-    alert('Please enter a City');
+    alert('Please enter City name');
   }
 };
 
