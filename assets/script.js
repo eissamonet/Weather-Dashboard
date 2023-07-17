@@ -18,7 +18,7 @@ var loadcities = function() {
   }
   citiesLoaded = JSON.parse(citiesLoaded);
   
-  for (var i=0; < citiesLoaded.length; i++) {
+  for (var i = 0; i < citiesLoaded.length; i++) {
     displaySearchCities(citiesLoaded[i])
     cities.push(citiesLoaded)
   }
@@ -47,7 +47,7 @@ var displaySearchCities = (city)
 
 // display current weather conditions
 
-var displayCurrentData = function(city, data){
+var displayCurrentData = function(city, data) {
 
   var tempCurrent = Math.round(data.current.temp);
   var humidity = Math.round(data.current.humidity);
@@ -136,3 +136,63 @@ var displayForecastData = function(data) {
 
   }
 };
+
+  // make request to url + check if city is valid
+
+var getCityData = function (response) {
+
+  var cityInfoUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIKey; 
+  
+
+  fetch(cityInfoUrl)
+  .then(function (response) {
+    if (response.ok) {
+      console.log(response);
+      response.json().then(function (data) {
+        console.log(data)
+      });
+    } else {
+      alert('city not found');
+    }
+  });  
+};        
+
+        var cityName = data.name;
+        var latitude = data.coord.lat;
+        var longgitude = data.coord.lon;
+
+
+        var prevSearch = cities.includes(cityName)
+        if (!prevSearch) {
+          cities.push(cityName)
+          saveCities()
+          displaySearchCities(cityName)
+        }
+       
+        // 5-day forcast API
+
+        var forecastUrl = 'https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}';
+        
+      fetch(forecastUrl)
+      .then(function (response) {
+        response.json().then(function (data) {
+          console.log(data)
+      });
+
+          displayCurrentData(city, data);
+          displayForecastData(data);
+      });
+      
+      // load prev searched cities
+
+      loadcities()
+
+      // submit listener when city is entered
+
+      formEl.addEventListener('submit', function() {
+        cityInput = inputEl.ariaValueMax.trim();
+        getCityData(cityInput);
+      }
+
+    
+    
