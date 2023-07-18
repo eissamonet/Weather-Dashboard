@@ -1,0 +1,10 @@
+h1 {
+    font-size: 30;
+    font-style: normal;
+    text-align: center;
+}
+
+.searchBtn:hover {
+    color: bisque;
+
+}
