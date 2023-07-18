@@ -52,18 +52,14 @@ var displayCurrentData = function(city, data) {
   var tempCurrent = Math.round(data.current.temp);
   var humidity = Math.round(data.current.humidity);
   var windSpeed = data.current.windSpeed;
-  var uvIndex = data.current.uvi;
   var iconCurrent = data.current.weather[0].icon;
 
-// date/icon/city HTML tags created
+// date/city HTML tags created
   currentCityContainerEl.textContent = ""
   currentCityContainerEl.setAttribute('class', "m-3 border col-10 text-center")
   var divCityHeader = document.createElement('div');
   var headerCityDate = document. createElement('h2');
   var currentDate = dayjs().format('L');
-  var imageIcon = document.createElement('img');
-  imageIcon.setAttribute('src', '')
-  imageIcon.setAttribute('src', "https://openweathermap.org/img/wn/" + iconCurrent + "@2x.png")
   headerCityDate.textContent = city + " (" + currentDate + ")";
 
   divCityHeader.appendChild(headerCityDate)
@@ -141,7 +137,7 @@ var displayForecastData = function(data) {
 
 var getCityData = function (response) {
 
-  var cityInfoUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIKey; 
+  var cityInfoUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={92c39c28b00faf2a7003a9133027497d}'
   
 
   fetch(cityInfoUrl)
@@ -171,7 +167,7 @@ var getCityData = function (response) {
        
         // 5-day forcast API
 
-        var forecastUrl = 'https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}';
+        var forecastUrl = 'https://api.openweathermap.org/data/2.5/weather?q={cities}&appid={92c39c28b00faf2a7003a9133027497d}';
         
       fetch(forecastUrl)
       .then(function (response) {
@@ -189,7 +185,7 @@ var getCityData = function (response) {
 
       // submit listener when city is entered
 
-      formEl.addEventListener('submit', function() {
+      formEl.addEventListener ('submit', function() {
         cityInput = inputEl.ariaValueMax.trim();
         getCityData(cityInput);
       }
