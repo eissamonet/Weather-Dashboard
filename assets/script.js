@@ -188,7 +188,7 @@ var getCityData = function (response) {
       formEl.addEventListener ('submit', function() {
         cityInput = inputEl.ariaValueMax.trim();
         getCityData(cityInput);
-      }
+      })
 
     
-    
+  
