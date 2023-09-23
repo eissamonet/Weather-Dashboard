@@ -1,13 +1,10 @@
 // weather API key
 var APIKey = "92c39c28b00faf2a7003a9133027497d";
 
-var formEl = document.getElementById('cityForm')
-var inputEl = document.getElementById('cityInput');
-var btnEl = document.getElementById('searchBtn');
-var searchHistoryEl = document.getElementById('searchHistory')
-var currentCityContainerEl = document.getElementById('currentContainer')
-var futureWeatherEl = document.getElementById('5-day');
-var forecastSectionEl = document.getElementById('forecastSection');
+// HTML elements
+
+
+
 
 var cities = []
 

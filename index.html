@@ -11,92 +11,38 @@
   <link rel="stylesheet" href="./assets/style.css" />
   <title>Weather Dashboard</title>
 </head>
-
 <body>
-  <h1>Weather Dashboard</h1>
-
-<div class="weather-containter container">
-  
-
-<!---search bar-->
-  <div class="row">
-    <div class="col-4">
-      <div class="card bg-light">
-      <h3 class="search">Search for a city:</h3>
-      <form id="user-form" class="card-body">
-        <label class="form-label" for="city">City</label>
-        <input name="city-input" size="30" id="city-input" type="text" class="form-control" placeholder="Enter city name" />
-        <button type="submit" class="btn btn-primary">Search</button>
-      </form>
-      <ul class="list-group" id="search-container"></ul>"  
-    </div>
-  </div>
-
-<!---City Card-->
-
-  <div class="col-8">
-    <div class="card bg-light">
-      <div class="current-weather">
-        <h2 class="subtitle"><span id="city-searce-term">Search for a city</span>
-          <span id="current-date"></span>
-          <img id="weather-icon" alt="weather icon">
-        </h2>
-        <div id="city-container" class="list-group"></div>
-
-        <div class="weather-input">
-          <p>Temperature: <span id="temperature"></span></p>
-          <p>Humidity: <span id="humidity"></span></p>
-          <p>Wind Speed: <span id="wind-speed"></span></p>
-          <p>UV Index: <span id="uv-index"></span></p>
-        </div>
-    </div>
-
-<!---5 Day Forecast-->
-
-  <div class="row" id="forcast-card">
-    <div class="card col-2 text-white" id="day-1">
-        <p class="card-text" id="date-1"></p>
-        <img id="weather-icon-1" src="" alt="weather icon">
-        <p class="card-text" id="temp-1"></p>
-        <p class="card-text" id="humidity-1"></p>
-    </div>
-    
-    <div class="card col-2 text-white" id="day-2">
-        <p class="card-text" id="date-2"></p>
-        <img id="weather-icon-2" src="" alt="weather icon">
-        <p class="card-text" id="temp-2"></p>
-        <p class="card-text" id="humidity-2"></p>
-    </div>
-
-    <div class="card col-2 text-white" id="day-3">
-        <p class="card-text" id="date-3"></p>
-        <img id="weather-icon-3" src="" alt="weather icon">
-        <p class="card-text" id="temp-3"></p>
-        <p class="card-text" id="humidity-3"></p>
-    </div>
-
-    <div class="card col-2 text-white" id="day-4">
-        <p class="card-text" id="date-4"></p>
-        <img id="weather-icon-4" src="" alt="weather icon">
-        <p class="card-text" id="temp-4"></p>
-        <p class="card-text" id="humidity-4"></p>
-    </div>
-
-    <div class="card col-2 text-white" id="day-5">
-        <p class="card-text" id="date-5"></p>
-        <img id="weather-icon-5" src="" alt="weather icon">
-        <p class="card-text" id="temp-5"></p>
-        <p class="card-text" id="humidity-5"></p>
-    </div>
-  </div>
-        
- 
-  </main>
+    <header class="bg-dark text-white text-center p-2">
+       <h1>Weather Dashboard</h1>
+    </header>
+    <main class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-md-3 p-2 search-colum">
+          <form class="border p-2" id="city-search-form">
+            <h2>Search for a City</h2>
+            <input type="text" class="form-control" id="city-search-input" placeholder="City Name" />
+            <button type="submit" class="btn btn-primary mt-2">Search</button>
+          </form>
+          <div class="border p-2 mt-2">
+            <h2>Search History</h2>
+            <ul id="search-history" class="list-group"></ul>
+          </div>
+        <div class="col-12 col-md-9 p-2">
+          <div class="border p-2">
+            <h2>Current Weather</h2>
+            <div id="current-weather-container"></div>
+          </div>
+          <div class="border p-2 mt-2">
+            <h2>5-Day Forecast</h2>
+            <div id="fiveday-forecast" class="d-flex flex-wrap justify-content-center"></div>
+          </div>
+      </div>
+    </main>
+      
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="./assets/script.js"></script>
 </body>
-
 </html>
 
 
