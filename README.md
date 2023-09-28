@@ -27,6 +27,7 @@ GIVEN a weather dashboard with form inputs
 - [Day.js](https://day.js.org/en/)
 - [Bootstrap](https://getbootstrap.com/)
 - [Open Weather](https://openweathermap.org/current#name)
+- [tailwindcss](https://tailwindcss.com/)
 
 
 ## License
