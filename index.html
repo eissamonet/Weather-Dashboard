@@ -24,11 +24,11 @@
         <div class="card bg-light
         <h3 class="Search"> Enter a City:</h3>
         <form id="user-form" class="card-body">
-          <label class="form-label" for="city">City</label>
-          <input class="form-label" type="text" name="city-input" size="30" id="city-input" placeholder="Enter a city name">
+          <label class="form-label" for="city"></label>
+          <input class="form-input" type="text" autofocus="true" name="city-input" size="30" id="city-input" placeholder="Enter a city name">
           <button type="submit" class="btn btn-primary">Search</button>
         </form>
-        <ul class="list-group" id="city-list"></ul>
+        <ul class="list-group" id="search-container"></ul>
       </div>
     </div>
 
@@ -42,22 +42,23 @@
         <div id="city-container" class="list-group"></div>
         </div>
 
-        <div class="weather-details">
-        <p class="temp">Temperature: <span id="temp"></span></p>
-        <p class="humidity">Humidity: <span id="humidity"></span></p>
-        <p class="wind-speed">Wind Speed: <span id="wind-speed"></span></p>
-        <p class="uv-index">UV Index: <span id="uv-index"></span></p>
+        <div class="weather-input">
+        <p class="temp">Temperature: <span id="temp-input"></span></p>
+        <p class="humidity">Humidity: <span id="humidity-input"></span></p>
+        <p class="wind">Wind Speed: <span id="wind-input"></span></p>
+        <p class="uv">UV Index: <span id="uv-input"></span></p>
         </div>
       </div>
 
       <!-- 5 day forecast -->
       <div class="row">
-        <h3 class="forecast-title">5-Day Forecast:</h3>
+        <h3 class="forecast-header">5-Day Forecast:</h3>
       </div>
 
       <div class="row" id="forecast-container"></div>
         <div class="card col-2 text-white" id="day-1">
           <p class="card-1" id="date-0">Date</p>
+          <img id="city-icon-1"></img>
           <p class="card-1" id="temp-0">Temp:</p>
           <p class="card-1" id="humidity-0">Humidity:</p>
           </p>
@@ -65,6 +66,7 @@
 
         <div class="card col-2 text-white" id="day-2">
           <p class="card-2" id="date-1">Date</p>
+          <img id="city-icon-2"></img>
           <p class="card-2" id="temp-1">Temp:</p>
           <p class="card-2" id="humidity-1">Humidity:</p>
           </p>
@@ -72,6 +74,7 @@
 
         <div class="card col-2 text-white" id="day-3">
           <p class="card-3" id="date-2">Date</p>
+          <img id="city-icon-3"></img>
           <p class="card-3" id="temp-2">Temp:</p>
           <p class="card-3" id="humidity-2">Humidity:</p>
           </p>
@@ -79,6 +82,7 @@
 
         <div class="card col-2 text-white" id="day-4">
           <p class="card-4" id="date-3">Date</p>
+          <img id="city-icon-4"></img>
           <p class="card-4" id="temp-3">Temp:</p>
           <p class="card-4" id="humidity-3">Humidity:</p>
           </p>
@@ -86,6 +90,7 @@
 
         <div class="card col-2 text-white" id="day-5">
           <p class="card-5" id="date-4">Date</p>
+          <img id="city-icon-5"></img>
           <p class="card-4" id="temp-4">Temp:</p>
           <p class="card-4" id="humidity-4">Humidity:</p>
           </p>
