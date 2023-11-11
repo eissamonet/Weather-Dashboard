@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./css/style.css">
   <title>Weather Dashboard</title>
 </head>
 
@@ -21,7 +21,7 @@
   <!-- search bar-->
     <div class="row">
       <div class="col-4">
-        <div class="card bg-light
+        <div class="card bg-light"></div>
         <h3 class="Search"> Enter a City:</h3>
         <form id="user-form" class="card-body">
           <label class="form-label" for="city"></label>
@@ -34,7 +34,7 @@
 
     <!-- city card -->
     <div class="col-8">
-      <div class="card bg-light">
+      <div class="card light">
         <div class="current-weather">
         <h2 class="subtitle"><span id="city-search-term">Search for a city to view weather</span>
           <span id="current-date"></span>
@@ -42,16 +42,28 @@
         <div id="city-container" class="list-group"></div>
         </div>
 
-        <div class="weather-input">
+        <div id="single_day_forecast">
+          <!-- <p></p> // document.createElement("p") -->
+          <!-- <p>Paragraph with text inside</p> // document.createElement("p").innerHTML = "Paragraph with text inside" -->
+          
+          <!-- <p class="temp">Temperature: <span id="temp-input">10</span></p>
+          <p class="humidity">Humidity: <span id="humidity-input">20</span></p>
+          <p class="wind">Wind Speed: <span id="wind-input"></span>30</p> -->
+        </div>
+
+        <div id="five_daya_forecast">
+
+        </div>
+        <!-- <div class="weather-input">
         <p class="temp">Temperature: <span id="temp-input"></span></p>
         <p class="humidity">Humidity: <span id="humidity-input"></span></p>
         <p class="wind">Wind Speed: <span id="wind-input"></span></p>
         <p class="uv">UV Index: <span id="uv-input"></span></p>
         </div>
-      </div>
+      </div> -->
 
       <!-- 5 day forecast -->
-      <div class="row">
+      <!-- <div class="row">
         <h3 class="forecast-header">5-Day Forecast:</h3>
       </div>
 
@@ -95,11 +107,11 @@
           <p class="card-4" id="humidity-4">Humidity:</p>
           </p>
         </div>
-    </div>
+    </div> -->
   </div>  
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </body>
 </html>
 

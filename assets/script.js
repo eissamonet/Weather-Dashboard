@@ -10,7 +10,7 @@ var currentWeatherEl = document.querySelector("#current-weather");
 var previousCityEl = document.getElementById("#search-container");
 var fiveDayEl = document.querySelector("#forecast-cards");
 var currentUveEl = document.querySelector("#uv-input");
-
+let singleDayForecastDiv = document.querySelector("#single_day_forecast")
 
 var cityArray = [];
 
@@ -38,6 +38,31 @@ var clickHandler = function (event) {
   getForecast(clickCity);
 };
 
+function displayCurrentWeather(data, city){
+  // console.log(data);
+  // console.log(data.main.temp);
+  singleDayForecastDiv.innerHTML = ""
+  // console.log(city);
+  let cityDiv = document.createElement("div")
+  let cityNameParagraph = document.createElement("p")
+  cityNameParagraph.innerHTML = city
+  cityDiv.appendChild(cityNameParagraph)
+  singleDayForecastDiv.appendChild(cityDiv)
+
+  let tempParagraph = document.createElement("p")
+  let tempSpanEl = document.createElement("span")
+  tempSpanEl.innerHTML = data.main.temp
+  tempParagraph.innerHTML = `Temperature: `
+  tempParagraph.appendChild(tempSpanEl)
+  singleDayForecastDiv.appendChild(tempParagraph)
+
+  let humidityParagraph = document.createElement("p")
+  let humiditySpanEl = document.createElement("span")
+  humiditySpanEl.innerHTML = data.main.humidity
+  humidityParagraph.innerHTML= 'Humidity: '
+  humidityParagraph.appendChild(humiditySpanEl)
+  singleDayForecastDiv.appendChild(humidityParagraph)
+}
 // request Current Weather API
 var getCityWeather = function (city) {
     var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIKey;
@@ -155,7 +180,7 @@ var getForecast = function (city) {
 
 // display 5 day forecast
 var displayForecast = function (list) {
-  console.log(list);
+  // console.log(list);
     for (var i = 0; i < list.length; i++) {
     // date
     var displayDate1 = document.querySelector("#date-0");
